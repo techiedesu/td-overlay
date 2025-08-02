@@ -1,4 +1,4 @@
-# Yet another ebuild storage "tdesu"
+# Yet another ebuild storage "td"
 
 ## About
 
