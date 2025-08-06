@@ -68,7 +68,7 @@ src_unpack() {
 	unpack ${MY_PN}-${MY_PV}.tar.gz
 	CC_PN="$(echo $MY_PN | sed -e 's/^\(.\)/\U\1/' -e 's/-\([a-z]\)/\U\1/g')"
 	PN_P=$"${MY_PN/-canary}"
-	
+
 	mv "${CC_PN}" "${MY_PN}"
 	mv "${MY_PN}/${PN_P}.png" "${MY_PN}/${MY_PN}.png"
 	mv "${MY_PN}/${CC_PN}" "${MY_PN}/${MY_PN}"
@@ -94,6 +94,9 @@ src_prepare() {
 	sed -i '/^Icon=discord$/ s/$/-canary/' \
 		"${MY_PN}.desktop" ||
 		die "fixing of icon on .desktop failed"
+	sed -i '/^StartupWMClass=discord$/ s/$/-canary/' \
+		"${MY_PN}.desktop" ||
+		die "fixing of StartupWMClass on .desktop failed"
 	# USE seccomp
 	if ! use seccomp; then
 		sed -i '/Exec/s/Discord/Discord --disable-seccomp-filter-sandbox/' \
