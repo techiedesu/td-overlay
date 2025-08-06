@@ -1,0 +1,1 @@
+/mnt/2t/dev/td-overlay/net-im/discord-canary/discord-canary-0.0.731.ebuild
