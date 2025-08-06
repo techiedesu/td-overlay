@@ -15,7 +15,7 @@ echo "ebuild new         = $NEW_EBUILD_PATH"
 
 if [ "$LATEST_EBUILD_PATH" != "$NEW_EBUILD_PATH" ]; then
     echo "Creating new ebuild symlink for discord canary $NEW_VERSION"
-    ln -s $LATEST_EBUILD_FILE_PATH $NEW_EBUILD_PATH
+    ln -s $(basename ${LATEST_EBUILD_FILE_PATH}) $NEW_EBUILD_PATH
 
     echo "Updating manifest..."
     pkgdev manifest
