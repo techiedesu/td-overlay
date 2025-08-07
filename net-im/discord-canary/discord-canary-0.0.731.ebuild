@@ -22,7 +22,7 @@ LICENSE="all-rights-reserved"
 SLOT="0"
 KEYWORDS="amd64"
 RESTRICT="bindist mirror strip test"
-IUSE="appindicator wayland +seccomp"
+IUSE="appindicator +seccomp"
 
 RDEPEND="
 	>=app-accessibility/at-spi2-core-2.46.0:2
@@ -88,7 +88,7 @@ src_prepare() {
 	chromium_remove_language_paks
 	popd >/dev/null || die "location reset for language cleanup failed"
 	# fix .desktop exec location
-	sed -i "/Exec/s:/usr/share/discord-canary/DiscordCanary:${DESTDIR}/${MY_PN}:" \
+	sed -i "/Exec/s:/usr/share/discord-canary/DiscordCanary:/usr/bin/${MY_PN}:" \
 		"${MY_PN}.desktop" ||
 		die "fixing of exec location on .desktop failed"
 	sed -i '/^Icon=discord$/ s/$/-canary/' \
@@ -102,12 +102,6 @@ src_prepare() {
 		sed -i '/Exec/s/Discord/Discord --disable-seccomp-filter-sandbox/' \
 			"${MY_PN}.desktop" ||
 			die "sed failed for seccomp"
-	fi
-	# USE wayland. Enforce Wayland usage
-	if use wayland; then
-		sed -i '/^Exec=/ s/$/ --ozone-platform=wayland --disable-features=WaylandWindowDecorations/' \
-			"${MY_PN}.desktop" ||
-			die "sed failed for wayland"
 	fi
 }
 
@@ -139,7 +133,7 @@ src_install() {
 
 	# https://bugs.gentoo.org/898912
 	if use appindicator; then
-		dosym ../../usr/lib64/libayatana-appindicator3.so /opt/discord/libappindicator3.so
+		dosym ../../usr/lib64/libayatana-appindicator3.so /opt/discord-canary/libappindicator3.so
 	fi
 }
 
