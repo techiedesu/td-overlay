@@ -1,0 +1,1 @@
+discord-canary-0.0.731.ebuild
