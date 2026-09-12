@@ -51,8 +51,8 @@ echo "Overlay root: $OVERLAY_ROOT"
 
 DISCORD_CANARY_EBUILDS_PATH="$OVERLAY_ROOT/net-im/discord-canary"
 
-LATEST_EBUILD_FILE_PATH=$(find $DISCORD_CANARY_EBUILDS_PATH ! -name 'Manifest' -type f | sort -n | tail -n1)
-LATEST_EBUILD_PATH=$(find $DISCORD_CANARY_EBUILDS_PATH ! -name 'Manifest' | sort -n | tail -n1)
+LATEST_EBUILD_FILE_PATH=$(find $DISCORD_CANARY_EBUILDS_PATH ! -name 'Manifest' -type f | sort -V | tail -n1)
+LATEST_EBUILD_PATH=$(find $DISCORD_CANARY_EBUILDS_PATH ! -name 'Manifest' | sort -V | tail -n1)
 
 NEW_VERSION="$(curl -s 'https://discord.com/api/updates/canary?platform=linux' | jq -Mr .name)"
 
