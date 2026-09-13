@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<!-- maintainer-needed -->
+	<longdescription lang="en">
+		Upstream binary build of the Keybase client, repackaged from the
+		official Debian package. Unlike app-crypt/keybase it also ships the
+		Electron GUI, which cannot be built from source without network
+		access during the build.
+	</longdescription>
+	<use>
+		<flag name="fuse">Install kbfsfuse, git-remote-keybase and the KBFS redirector</flag>
+		<flag name="gui">Install the bundled Electron GUI (/opt/keybase/Keybase)</flag>
+		<flag name="kbnm">Install the kbnm native messaging host for browser integration</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">keybase/client</remote-id>
+	</upstream>
+</pkgmetadata>
