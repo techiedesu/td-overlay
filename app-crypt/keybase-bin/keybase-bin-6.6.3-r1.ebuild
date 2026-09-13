@@ -98,6 +98,16 @@ src_prepare() {
 		pushd opt/keybase/locales > /dev/null || die
 		chromium_remove_language_paks
 		popd > /dev/null || die
+
+		# Electron announces itself as "Keybase" (Wayland app_id, X11
+		# WM_CLASS), so window managers look for a desktop entry of exactly
+		# that name. Without it KWin falls back to the icon of whatever
+		# launched the app. Ship a hidden alias next to the real entry.
+		sed -i '/^Type=Application$/a StartupWMClass=Keybase' \
+			usr/share/applications/keybase.desktop || die
+		cp usr/share/applications/keybase.desktop \
+			usr/share/applications/Keybase.desktop || die
+		echo "NoDisplay=true" >> usr/share/applications/Keybase.desktop || die
 	fi
 }
 
@@ -156,7 +166,8 @@ src_install() {
 		fowners root:root /opt/keybase/chrome-sandbox
 		fperms 4755 /opt/keybase/chrome-sandbox
 
-		domenu usr/share/applications/keybase.desktop
+		domenu usr/share/applications/keybase.desktop \
+			usr/share/applications/Keybase.desktop
 		insinto /usr/share/icons
 		doins -r usr/share/icons/hicolor
 
