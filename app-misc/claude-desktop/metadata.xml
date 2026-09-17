@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>techiedesu@protonmail.com</email>
+	</maintainer>
+	<longdescription lang="en">
+		Anthropic's official Claude desktop application, repacked from the
+		Debian package they publish at downloads.claude.ai. It bundles its own
+		Electron runtime, the MCP host, and the QEMU-backed sandbox Cowork
+		runs agent sessions in. The Debian-only parts of the package (apt
+		repository registration, the AppArmor userns profile and the lintian
+		overrides) are dropped.
+	</longdescription>
+	<use>
+		<flag name="appindicator">Use <pkg>dev-libs/libayatana-appindicator</pkg> for the system tray icon</flag>
+		<flag name="cowork">Install the firmware compatibility symlinks and pull in the QEMU stack that the Cowork agent sandbox needs</flag>
+		<flag name="gnome">Register the GNOME Shell search provider for Claude Code sessions (needs <pkg>dev-libs/gjs</pkg>)</flag>
+	</use>
+	<upstream>
+		<doc>https://claude.com/download</doc>
+	</upstream>
+</pkgmetadata>
