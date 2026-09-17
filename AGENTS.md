@@ -1,0 +1,1 @@
+.agents/skills/gentoo-ebuild/SKILL.md

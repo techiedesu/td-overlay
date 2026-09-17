@@ -1,3 +1,6 @@
 metadata/md5-cache/**/
 logs/*
 !logs/.keep
+
+# harness-local state; the tracked copy lives in .agents/
+.omp/
