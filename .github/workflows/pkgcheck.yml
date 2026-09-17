@@ -1,0 +1,28 @@
+name: pkgcheck
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  syntax:
+    name: bash syntax
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check ebuild, eclass and script syntax
+        run: scripts/test-ebuilds.sh --syntax-only
+
+  pkgcheck:
+    name: pkgcheck scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      # Runs `pkgcheck ci --exit GentooCI` inside ghcr.io/pkgcore/pkgcheck, which
+      # syncs the gentoo master repo (this overlay declares masters = gentoo) and
+      # regenerates metadata before scanning. The repo's own QA policy comes from
+      # metadata/pkgcheck.conf, so no arguments are duplicated here.
+      - uses: pkgcore/pkgcheck-action@v1
